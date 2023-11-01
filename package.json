@@ -4,16 +4,21 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "dev": "tsx ./src/main.ts",
+    "serve": "tsx ./src/main.ts",
+    "build": "tsc"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "@prisma/client": "5.5.2",
     "fastify": "^4.24.3",
     "fastify-guard": "^2.0.0",
     "fastify-zod": "^1.4.0",
     "jsonwebtoken": "^9.0.2",
+    "pino": "^8.16.1",
+    "prisma": "^5.5.2",
     "zennv": "^0.1.1",
     "zod": "^3.22.4"
   },
