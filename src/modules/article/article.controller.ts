@@ -1,11 +1,15 @@
 import { FastifyReply, FastifyRequest } from "fastify";
-import { createArticle } from "./article.service";
+import {
+  createArticle,
+  fetchArticleById,
+  fetchArticles,
+} from "./article.service";
 import { logger } from "../../utils/logger";
-import { TArticle } from "./article.schema";
+import { TArticleBody } from "./article.schema";
 
-export async function createArticleHander(
+export async function createArticleHandler(
   req: FastifyRequest<{
-    Body: TArticle;
+    Body: TArticleBody;
   }>,
   res: FastifyReply,
 ) {
@@ -19,4 +23,33 @@ export async function createArticleHander(
 
     res.code(500).send({ message: "Error - can not create an article" });
   }
+}
+
+export async function fetchArticlesHandler() {
+  const articles = await fetchArticles();
+
+  return articles;
+}
+
+export async function fetchArticleByIdHandler(
+  req: FastifyRequest<{
+    Params: { id: string };
+  }>,
+  res: FastifyReply,
+) {
+  const { id } = req.params;
+
+  if (!id) return res.code(400).send({ message: "Invalid article ID" });
+
+  try {
+    const article = fetchArticleById(id);
+
+    res.code(200).send(article);
+  } catch (e) {
+    logger.error(e);
+
+    res.code(500).send(e);
+  }
+
+  return {};
 }
