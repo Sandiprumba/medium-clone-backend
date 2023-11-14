@@ -1,10 +1,18 @@
 import { FastifyInstance } from "fastify";
-import { createArticleHander } from "./article.controller";
+import {
+  createArticleHandler,
+  fetchArticleByIdHandler,
+  fetchArticlesHandler,
+} from "./article.controller";
+import { TArticleSchema } from "./article.schema";
 
 export async function articleRoutes(app: FastifyInstance) {
   // Create an article.
-  app.post("/", {}, createArticleHander);
+  app.post("/", { schema: TArticleSchema }, createArticleHandler);
 
   // Get Articles.
-  app.get("/", {}, () => {});
+  app.get("/", fetchArticlesHandler);
+
+  // Get One Article.
+  app.get("/:id", fetchArticleByIdHandler);
 }
