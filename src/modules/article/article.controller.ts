@@ -38,18 +38,14 @@ export async function fetchArticleByIdHandler(
   res: FastifyReply,
 ) {
   const { id } = req.params;
-
   if (!id) return res.code(400).send({ message: "Invalid article ID" });
 
   try {
     const article = fetchArticleById(id);
-
     res.code(200).send(article);
   } catch (e) {
     logger.error(e);
 
     res.code(500).send(e);
   }
-
-  return {};
 }
