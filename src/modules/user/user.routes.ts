@@ -1,10 +1,14 @@
 import { FastifyInstance } from "fastify";
 import { TUserSchema } from "./user.schema";
-import { createUserHandler, fetchUserHandler } from "./user.controller";
+import {
+  createUserHandler,
+  fetchOneUserHander,
+  fetchUsersHandler,
+} from "./user.controller";
 
 export async function userRoutes(app: FastifyInstance) {
   // Get User.
-  app.get("/", fetchUserHandler);
+  app.get("/", fetchUsersHandler);
 
   // User sign up
   // TODO: add schema and controller
@@ -13,4 +17,7 @@ export async function userRoutes(app: FastifyInstance) {
   // User Sign in
   // TODO: add schema and controller
   app.post("/login", {}, () => {});
+
+  // Fetch one user
+  app.get("/:id", {}, fetchOneUserHander);
 }
