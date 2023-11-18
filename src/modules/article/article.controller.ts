@@ -31,6 +31,12 @@ export async function fetchArticlesHandler() {
   return articles;
 }
 
+export async function fetchTrendingArticlesHandler() {
+  const articles = await fetchArticles();
+
+  return articles;
+}
+
 export async function fetchArticleByIdHandler(
   req: FastifyRequest<{
     Params: { id: string };
