@@ -15,6 +15,12 @@ export async function fetchArticles() {
   return articles;
 }
 
+export async function fetchTrendingArticles() {
+  const trendingArticles = await prisma.article.findMany();
+
+  return trendingArticles;
+}
+
 export async function fetchArticleById(id: string) {
   const article = await prisma.article.findUnique({
     where: {
