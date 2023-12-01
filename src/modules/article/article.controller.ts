@@ -3,6 +3,7 @@ import {
   createArticle,
   fetchArticleById,
   fetchArticles,
+  fetchTrendingArticles,
 } from "./article.service";
 import { logger } from "../../utils/logger";
 import { TArticleBody } from "./article.schema";
@@ -32,9 +33,9 @@ export async function fetchArticlesHandler() {
 }
 
 export async function fetchTrendingArticlesHandler() {
-  const articles = await fetchArticles();
+  const trendingArticles = await fetchTrendingArticles();
 
-  return articles;
+  return trendingArticles;
 }
 
 export async function fetchArticleByIdHandler(
